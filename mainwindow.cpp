@@ -7,16 +7,42 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "config.h"
+#include "srctable.h"
+#include "filenamehandler.h"
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(QString filename, QWidget *parent)
 	: QMainWindow(parent)
 	, ui(new Ui::MainWindow)
+	, m_srcModel(new SrcTable(this))
 {
 	ui->setupUi(this);
+	if  (filename.isEmpty())
+	{
+		m_srcModel->loadConf(Config::conf());
+	}
+	else
+	{
+		SpinSrc row;
+		FilenameHandler fnh(filename, "spin");
+		row.src = fnh.fullname();
+		fnh.setExt("dat");
+		row.out = fnh.fullname();
+		SpinSrcVector rows( { row } );
+		m_srcModel->setData(rows);
+	}
+	SpinSrcVector rows =  m_srcModel->data();
+	for (int row = 0; row < rows.count(); ++row)
+	{
+		rows[row].result = "Unknown";
+		rows[row].resultCode = -1;
+	}
+	m_srcModel->setData(rows);
+	ui->srcView->setModel(m_srcModel);
 }
 
 MainWindow::~MainWindow()
 {
+	m_srcModel->saveConf(Config::conf());
 	delete ui;
 }
 

@@ -13,13 +13,14 @@ namespace Ui {
 class MainWindow;
 }
 
+class SrcTable;
 
 class MainWindow : public QMainWindow
 {
 	Q_OBJECT
 
 public:
-	explicit MainWindow(QWidget *parent = nullptr);
+	explicit MainWindow(QString filename, QWidget *parent = nullptr);
 	~MainWindow();
 
 public slots:
@@ -31,6 +32,7 @@ private slots:
 
 private:
 	Ui::MainWindow *ui;
+	SrcTable *m_srcModel;
 };
 
 #endif // MAINWINDOW_H

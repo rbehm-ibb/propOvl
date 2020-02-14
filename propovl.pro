@@ -21,12 +21,14 @@ DEFINES +=
 
 HEADERS += \
 	datcompiler.h \
-	mainwindow.h
+	mainwindow.h \
+	srctable.h
 
 SOURCES += \
 	datcompiler.cpp \
 	main.cpp \
-	mainwindow.cpp
+	mainwindow.cpp \
+	srctable.cpp
 
 FORMS += \
 	mainwindow.ui
@@ -36,7 +38,10 @@ RESOURCES += \
 
 DISTFILES += \
 	.gitignore \
+	LICENSE \
+	README.md \
 	rsc/logo.png \
 	rsc/defaults.rc \
-	rsc/styles.css
+	rsc/styles.css \
+	srctable.model
 

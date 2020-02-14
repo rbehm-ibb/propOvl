@@ -8,10 +8,14 @@
 #define DATCOMPILER_H
 
 
-class DatCompiler
+class DatCompiler : public QObject
 {
+	Q_OBJECT
 public:
 	DatCompiler();
+signals:
+
+
 };
 
 #endif // DATCOMPILER_H
